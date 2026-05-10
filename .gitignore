@@ -1,0 +1,50 @@
+# SpectorVim files
+*~
+Session.vim
+tagfiles
+tags
+.clangd
+.editorconfig
+.r00t_here
+# Compiled intermediate files and dirs
+.dirstamp
+.deps
+Makefile
+config.scan
+config.status
+all-includes.txt
+# Prerequisites
+*.d
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+# Precompiled Headers
+*.gch
+*.pch
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+# Fortran module files
+*.mod
+*.smod
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+# Executables
+*.exe
+*.out
+*.app
+# Other files and dirs
+temp
+bin
+*.log
+*.cache
+.env
+*.c
+*.pcap
+main
