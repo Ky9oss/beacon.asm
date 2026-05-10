@@ -7,6 +7,7 @@ entry start
 
 segment readable executable
 
+
 macro printf buf,len
 {
     ; write(1, message, message_len)
@@ -18,24 +19,41 @@ macro printf buf,len
     syscall
 }
 
-start:
-
-    printf hello.data, hello.length
+macro sys_exit
+{
     ; exit(0)
     mov     rax, 60         ; sys_exit
     xor     rdi, rdi
     syscall
+}
+
+macro self_delete
+{
+    ; int unlink(const char *path);
+    mov     rax, 87
+    mov     rdi, current_filename
+    syscall
+}
+
+start:
+
+    printf hello.data, hello.length
+    self_delete
+    sys_exit
 
 
 segment readable writable
 
 struc message data,length
 {
-    .data db data, length
-    .length dw length
+    .data db data, 0xA, 0
+    .length = $ - .data
 }
 
-hello message "h3ll0 beacon.asm", 16
+hello message "h3ll0 beacon.asm"
+
+current_filename db "main", 0
+proc_self_exe db "/proc/self/exe", 0
 
 ; message db "hello beacon.asm", 16
 ; message_len = $ - message

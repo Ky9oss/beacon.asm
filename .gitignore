@@ -9,7 +9,6 @@ tags
 # Compiled intermediate files and dirs
 .dirstamp
 .deps
-Makefile
 config.scan
 config.status
 all-includes.txt
