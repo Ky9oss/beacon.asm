@@ -27,11 +27,41 @@ macro sys_exit
     syscall
 }
 
+; -------------------------------
+; MACRO get_self_name
+; -------------------------------
+; PARAM nil
+; -------------------------------
+; STACK
+; low address
+; ┌───────────┐
+; │path + '\0'│◄───rsp-256
+; │...        │
+; │...        │◄───rsp
+; └───────────┘
+; high address
+; -------------------------------
+; REF_CODE
+; char buffer[256];
+; if (-1 == (readlink("/proc/self/exe", buffer, sizeof(buffer)))) {
+;     printf("error\n");
+; }
+; -------------------------------
+macro get_self_name
+{
+    mov     rax, 89
+    mov     rdi, proc_self_exe
+    lea     rsi, [rsp-256]
+    mov     rdx, 256
+    syscall
+}
+
 macro self_delete
 {
+    get_self_name
     ; int unlink(const char *path);
     mov     rax, 87
-    mov     rdi, current_filename
+    lea     rdi, [rsp-256]
     syscall
 }
 
