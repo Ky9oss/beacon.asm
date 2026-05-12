@@ -32,6 +32,8 @@ macro sys_exit
 ; -------------------------------
 ; PARAM nil
 ; -------------------------------
+; RETURN -> stack
+; -------------------------------
 ; STACK
 ; low address
 ; ┌───────────┐
@@ -54,6 +56,8 @@ macro get_self_name
     lea     rsi, [rsp-256]
     mov     rdx, 256
     syscall
+
+    mov byte [rsp-256+rax], 0  ; '\0'    
 }
 
 macro self_delete

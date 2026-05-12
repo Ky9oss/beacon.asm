@@ -4,6 +4,8 @@ ASSEMBLER = fasm
 AFLAGS = 
 BIN_DIRS = $(PWD)/bin
 
+SUBDIRS = foo bar baz
+
 all: $(ELFS) 
 
 %:%.asm
@@ -17,5 +19,11 @@ clean:
 echo: 
 	@echo $(PWD)
 
-.PHONY: all clean echo
+
+subdirs:
+	for dir in $(SUBDIRS); do \
+		$(MAKE) -C $$dir; \
+	done
+
+.PHONY: all clean echo subdirs
 

@@ -44,6 +44,6 @@ bin
 *.log
 *.cache
 .env
-*.c
+hello.c
 *.pcap
 main
